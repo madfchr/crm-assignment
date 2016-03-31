@@ -1,4 +1,7 @@
 # Add any require_relative statements here
+require_relative 'contact.rb'
+# This will load contact.rb before it loads crm.rb,
+# because the latter depends on the former.
 
 class CRM
 

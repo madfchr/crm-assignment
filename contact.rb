@@ -1,25 +1,56 @@
 class Contact
-
-  # Add any attr_reader and attr_accessors here
+  attr_accessor :id, :first_name, :last_name, :email, :note
+  # It creates methods and instance variables.
+  # Getters and setters for all of these named properties.
 
   # Add any class variables here
-
+  @@contacts = []
+  @@next_id = 1
   # This method should take four string arguments (first_name, last_name, email, note),
   # and initialize this instance of Contact.
   def initialize(first_name, last_name, email, note)
-    # Fill this in
+    @id = @@next_id
+    @first_name = first_name
+    @last_name = last_name
+    @email = email
+    @note = note
   end
 
-  # This method should take four string rguments (first_name, last_name, email, note),
+# # GETTER METHOD
+#   def first_name
+#     @first_name
+#   end
+#
+# # SETTER METHOD
+#   def first_name=(new_first_name)
+#     @first_name = new_first_name
+#   end
+
+  # To create a new instance of Contact :
+  # Values are saved as instance variables.
+  # ariane = Contact.new("Ariane", "Foucher", "ariane.df@me.com", "Tipsy")
+
+  # This method should take four string arguments (first_name, last_name, email, note),
   # and return the newly created contact
-  def self.create(first_name, last_name, email, note)
-    # Fill this in
+  def self.create(options)
+    # OR
+    # def self.create(first_name, last_name, email, note)
+
+    # 1 Make a new Contact
+    new_contact = new(options[:first_name], options[:last_name], options[:email], options[:note])
+    # OR self.new
+    # 2 Add it to the list of contacts (@@contacts)
+    @@contacts << new_contact
+    # 3 Increment the global id
+    @@next_id += 1
+    # 4 Return the contact we just created
+    new_contact
   end
 
   # This method takes no arguments
   # and return all of the existing contacts in array form
   def self.all
-    # Fill this in
+    @@contacts
   end
 
   # This method should take an integer id argument
@@ -48,7 +79,8 @@ class Contact
   # This method takes no arguments
   # It should return a string that is composed of the first and last names of the contact.
   def full_name
-    # Fill this in
+    "#{first_name} #{last_name}"
+    # [first_name, last_name].join(" ") would do the same!
   end
 
   # This method should take two string arguments (attribute, value)
